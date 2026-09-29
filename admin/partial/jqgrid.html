@@ -1,0 +1,68 @@
+<table id="{tableName}" class="g-jqgrid">
+
+</table>
+<script>
+    $("#{tableName}").jqGrid({
+        width: null,
+        shrinkToFit: false,
+        url: "php/jqgrid.show.php?tblName={tableName}",
+        datatype : "xml",
+        mtype : "GET",
+        colNames : {colNames},
+        colModel : {colModel},
+        toppager : true,
+        rowNum : 1000,
+        rowList : [50, 100, 500, 1000],
+        viewrecords : true,
+        sortname : "ID_{tableName}",
+        sortorder : "DESC",
+        editurl : "php/jqgrid.edit.php?tblName={tableName}",
+        height: 400,
+        onSelectRow : function(ids) {
+            rememberRow("{tableName}", ids);
+            focusRow("{tableName}");
+
+            var row = $(this).getRowData(ids);
+            showOnlyMy("{tableName}", row);
+        },
+        gridComplete : function() {
+            jqGridRemRow();
+        },
+        resizeStop : function(newwidth, index) {
+            setMyColumns("{tableName}");
+        }
+
+    }).jqGrid('navGrid', "#{tableName}_toppager", {
+        {addEditForm},
+        search : false,
+        refreshtext : 'Обновить'
+    }, {
+        width : 800,
+        dataheight : 400,
+        left : 250,
+        top : 10,
+        bottominfo : "Поля, помеченные (*), являются обязательными для заполнения",
+        {afterShowFormEdit},
+        afterclickPgButtons : function(whichbutton, formid, rowid) {
+            $(formid.selector + " select").trigger("chosen:updated");
+        },
+        closeAfterEdit : true,
+        closeOnEscape : true,
+        recreateForm : true,
+        reloadAfterSubmit: true
+    }, {
+        width : 800,
+        dataheight : 400,
+        left : 250,
+        top : 10,
+        bottominfo : "Поля, помеченные (*), являются обязательными для заполнения",
+        {afterShowFormAdd},
+        afterclickPgButtons : function(whichbutton, formid, rowid) {
+            $(formid.selector + " select").trigger("chosen:updated");
+        },
+        closeAfterAdd : true,
+        closeOnEscape : true,
+        recreateForm : true,
+        reloadAfterSubmit: true
+    }).jqGrid("bindKeys");
+</script>

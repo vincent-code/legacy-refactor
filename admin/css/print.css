@@ -1,0 +1,79 @@
+/* ==========================================================================
+   Print styles.
+   ========================================================================== */
+@media print {
+    *,
+    *:before,
+    *:after,
+    *:first-letter,
+    *:first-line {
+        background: transparent !important;
+        border: none !important;
+        color: #000000 !important;
+        /* Black prints faster:
+                                          http://www.sanbeiji.com/archives/953 */
+        box-shadow: none !important;
+        text-shadow: none !important;
+        text-align: left !important;
+    }
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+    pre,
+    blockquote {
+        border: 1px solid #999999;
+        page-break-inside: avoid;
+    }
+    /*
+     * Printing Tables:
+     * http://css-discuss.incutio.com/wiki/Printing_Tables
+     */
+    thead {
+        display: table-header-group;
+    }
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+    img {
+        max-width: 100% !important;
+    }
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+    .g-btn, .request, .landing__wrap-footer, .transport__item-request, .landing__wrap-partners, .landing__wrap-coop, .landing__wrap-map {
+        display: none !important;
+    }
+    .header__img {
+        margin-right: 30px !important;
+    }
+    .first__item {
+        display: inline-block !important;
+        margin: 0 30px 30px 30px !important;
+    }
+    .transport__content, .transport__item {
+        display: block !important;
+        width: auto !important;
+    }
+    .transport__content {
+        overflow: hidden !important;
+    }
+    .transport__item {
+        float: left !important;
+        margin: 0 20px 20px 20px !important;
+    }
+    .sender__title, .sender__desc {
+        height: auto !important;
+        padding: 0 !important;
+        margin: 10px !important;
+        width: auto !important;
+    }
+}
