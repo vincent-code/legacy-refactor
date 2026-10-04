@@ -7,6 +7,8 @@
         shrinkToFit: false,
         url: "php/jqgrid.show.php?tblName={tableName}",
         datatype : "xml",
+        // [SEC-6] jqGrid кодирует значения ячеек как HTML-текст (иначе содержимое из БД вставляется как есть: stored XSS)
+        autoencode : true,
         mtype : "GET",
         colNames : {colNames},
         colModel : {colModel},

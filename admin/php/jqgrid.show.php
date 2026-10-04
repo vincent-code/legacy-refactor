@@ -5,8 +5,11 @@
 
     db_connect();
 
-    $tblName = $_GET["tblName"];
-    $table = new ObjectTable($tblName);
+    // [SEC-1] чтение данных - только для вошедших пользователей (раньше было доступно анониму)
+    require_auth();
+
+    $tblName = $_GET["tblName"] ?? "";
+    $table = new ObjectTable($tblName); // [SEC] белый список + [SEC-1] право чтения таблицы в конструкторе
 
     echo $table->showData();
 

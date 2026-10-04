@@ -1,0 +1,2 @@
+# [SEC-1] Шаблон читается только сервером (file_get_contents), напрямую по HTTP не нужен
+Require all denied

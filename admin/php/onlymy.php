@@ -5,7 +5,12 @@
 
     db_connect();
 
-    $_SESSION["onlymy"] = $_POST["onlymy"];
+    // [SEC-1] только для вошедших; [SEC-5] только POST + CSRF-токен
+    require_auth();
+    csrf_check();
+
+    // [SEC] в сессию пишем только "1" или "0" (раньше - произвольное значение из $_POST)
+    $_SESSION["onlymy"] = (($_POST["onlymy"] ?? "") === "1") ? "1" : "0";
 
     db_disconnect();
 ?>

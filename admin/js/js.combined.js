@@ -12,4 +12,4 @@
 <!--#include file="fileapi/FileAPI.exif.js" -->
 <!--#include file="fileapi/jquery.fileapi.min.js" -->
 <!--#include file="vendor/FileSaver.min.js" -->
-<!--#include file="admin.min.js" -->
+<!--#include file="admin.js" -->

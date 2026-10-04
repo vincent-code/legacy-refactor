@@ -1,0 +1,25 @@
+# [SEC-7] В каталоге загрузок PHP-код исполняться не должен ни при каких именах и расширениях.
+# Лучше задавать то же самое в конфигурации vhost (там .htaccess не обойти):
+#   <Directory /var/www/html/img>  php_admin_flag engine off  </Directory>
+# nginx:  location ^~ /img/ { location ~ \.(php|phtml|phar|php[0-9]?)$ { return 403; } }
+
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php7.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php8.c>
+    php_flag engine off
+</IfModule>
+
+# Любые исполняемые расширения - запретить, а не отдавать как текст
+<FilesMatch "(?i)\.(php[0-9]?|phtml|phar|pht|phps|cgi|pl|py|sh|htaccess|htpasswd)$">
+    Require all denied
+</FilesMatch>
+RemoveHandler .php .phtml .phar .pht
+RemoveType .php .phtml .phar .pht
+Options -ExecCGI -Indexes
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+</IfModule>

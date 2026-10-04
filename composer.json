@@ -1,0 +1,10 @@
+{
+  "name": "legacy/refactor",
+  "description": "Тестовое задание Intop",
+  "require": {
+    "php": ">=8.1",
+    "vlucas/phpdotenv": "^5.6",
+    "smarty/smarty": "^5.0",
+    "nadar/quill-delta-parser": "^3.0"
+  }
+}

@@ -1,0 +1,30 @@
+services:
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: php-apache
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www/html  # Монтируем папку проекта в корень Apache
+    depends_on:
+      - db
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html
+
+  db:
+    image: mysql:8.0.32
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: testdb
+      MYSQL_USER: intop_user
+      MYSQL_PASSWORD: secret
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
